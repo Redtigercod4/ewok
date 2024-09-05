@@ -33,7 +33,7 @@ const Transmitter = () => {
         setModem(num);    
     };
 
-    const handlePlusPowerButton = (e: any) => {
+    const handlePlusPowerButton = () => {
         const tmpSettings = {
             ...settings,
             power: Math.min(tx.power + 1, maxPower)
@@ -66,7 +66,7 @@ const Transmitter = () => {
         }
     };
 
-    const handleMinusPowerButton = (e: any) => {
+    const handleMinusPowerButton = () => {
         const tmpSettings = {
             ...tx,
             power: tx.power - 1

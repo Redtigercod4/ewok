@@ -219,7 +219,7 @@ const SignalDetails = () => {
         const handleClickV = () => {
             setV(!v)
         }
-        const [visibleGroup, setVisibleGroup] = useState<boolean>(true);
+        //const [visibleGroup, setVisibleGroup] = useState<boolean>(true);
         
         /*const handleClickGroupEyeball = () => {
             signals.filter((x: any) => x.unit_type === group).forEach((signal: equipment) => {

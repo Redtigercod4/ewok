@@ -19,9 +19,9 @@ const StudentPage = () => {
         }
     }, [])
 
-    const handleClickChat = () => {
+    // const handleClickChat = () => {
         
-    };
+    // };
 
     return(
         <div className='studentPage'>

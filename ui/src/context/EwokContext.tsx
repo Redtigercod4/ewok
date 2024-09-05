@@ -81,12 +81,15 @@ const useEquipmentContext = (): IEquipmentContext => useContext(EquipmentContext
 const useSatEnvContext = (): ISatEnvContext => useContext(SatEnvContext);
 
 EwokProvider.propTypes = {
+    // @ts-ignore
     children: PropTypes.node
 };
 EquipmentProvider.propTypes = {
+    // @ts-ignore
     children: PropTypes.node
 };
 SatEnvProvider.propTypes = {
+    // @ts-ignore
     children: PropTypes.node
 };
 
