@@ -18,7 +18,7 @@ Ewok is a training aide toolset for spectrum analysis training. It is a 3 tier a
 1.  Clone repository via Git into a accessible directory
 2.  Navigate to the root of the ewok folder via a terminal
 3.  In the terminal, enter the following command to start the application ```docker compose up -d```
-4.  The application can now be accessed via ```localhost:3000```
+4.  The application can now be accessed via ```localhost:80```
 
 ## Application Development
 ```npm install``` - Install all node packages to run the application in development mode
