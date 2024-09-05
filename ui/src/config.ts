@@ -1,7 +1,7 @@
 const config = [
   {
-    apiUrl: "http://localhost:8080",
-    socketUrl: "http://localhost:8080",
+    apiUrl: "http://localhost:80/api",
+    socketUrl: "http://localhost:80/api",
   },
   {
     apiUrl: "https://ewok-sim-api.herokuapp.com",

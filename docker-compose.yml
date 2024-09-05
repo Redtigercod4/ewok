@@ -1,9 +1,42 @@
-version: '3'
-
-volumes:
-  pgdatasource:
+version: "3"
 
 services:
+  ewok-ui:
+    depends_on:
+      - "ewok-api"
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: ewok-web
+    ports:
+      - "80:80"
+    environment:
+      - FAST_REFRESH=false
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network
+
+  ewok-api:
+    depends_on:
+      ewok-db:
+        condition: service_healthy
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: ewok-api
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_HOST=ewok-db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=ewok
+    networks:
+      - app-network
+
   ewok-db:
     image: postgres
     container_name: ewok-database
@@ -15,7 +48,7 @@ services:
       - POSTGRES_PORT=5432
       - POSTGRES_DB=ewok
     ports:
-      - '5432:5432'
+      - "5432:5432"
     networks:
       - app-network
     healthcheck:
@@ -26,47 +59,9 @@ services:
     volumes:
       - pgdatasource:/var/lib/postgresql/data
 
-  ewok-api:
-    build: api/
-    container_name: ewok-api
-    depends_on:
-      ewok-db:
-        condition: service_healthy
-    ports: 
-      - '8080:8080'
-    networks:
-      - app-network
-    environment:
-      - NODE_ENV=development
-      - DATABASE_HOST=ewok-db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=ewok
-    volumes:
-      - type: bind
-        source: ./api
-        target: /app
-    command: npm run start
-
-  ewok-ui:
-    build: ui/
-    tty: true
-    container_name: ewok-web
-    environment:
-      - FAST_REFRESH=false
-    depends_on:
-      - 'ewok-api'
-    ports:
-      - '3000:3000'
-    networks:
-      - app-network
-    volumes:
-      - type: bind
-        source: ./ui
-        target: /app
-  
 networks:
   app-network:
     driver: bridge
-    
+
+volumes:
+  pgdatasource:
