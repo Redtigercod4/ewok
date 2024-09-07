@@ -1,8 +1,13 @@
+import "reflect-metadata";
+import { db } from "./database/data-source";
+
 /*
    USER INPUT REQUIRED!
    TYPE YOUR NETWORK IP
    ADDRESS ON LINE 7
 */
+
+db.initialize();
 
 const ipAddress = [ '192.168.0.53', '192.168.1.82', '10.11.87.119', '86.142.168.230', '195.213.38.151'];
 

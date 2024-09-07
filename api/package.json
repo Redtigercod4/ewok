@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
-    "start": "knex migrate:latest && nodemon ./index.ts --exec babel-node -e ts",
-    "start:dev": "export NODE_ENV=development && knex migrate:latest && nodemon --watch ./ ./index.ts"
+    "start": "npx tsc && nodemon dist/index.js",
+    "migrate": "npx ts-node --esm ./node_modules/knex --knexfile ./knexfile.ts migrate:latest"
   },
   "author": "",
   "license": "ISC",
@@ -13,13 +14,14 @@
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "knex": "^2.3.0",
     "nodemon": "^3.1.4",
     "pg": "^8.8.0",
-    "socket.io": "^4.5.3"
+    "reflect-metadata": "^0.2.2",
+    "socket.io": "^4.5.3",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.19.50",
     "typescript": "^5.5.4"
   }
 }
