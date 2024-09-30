@@ -1,7 +1,11 @@
 import { DataSource } from "typeorm";
-import { Equipment } from "./entity/equipment.entity";
-import { SatEnv } from "./entity/satenv.entity";
-import { InitializeSchema } from "./migration/01-initalise-schema.migration";
+import dotenv from "dotenv";
+import { __dirname } from "../utils/index.js";
+import { Equipment } from "./entity/equipment.entity.js";
+import { SatEnv } from "./entity/satenv.entity.js";
+import { InitializeSchema1727553773655 } from "./migration/1727553773655-InitializeSchema.js";
+
+dotenv.configDotenv();
 
 const host: string = process.env.API_DATABASE_HOST || "";
 const username: string = process.env.API_DATABASE_USERNAME || "";
@@ -12,14 +16,12 @@ if (!host || !username || !password || !database) {
   throw new Error("Unable to load database credentials");
 }
 
+const databaseUrl = `postgres://${username}:${password}@${host}:5432/${database}`;
+
 export const db = new DataSource({
   type: "postgres",
-  host: host,
-  port: 5432,
-  username: username,
-  password: password,
-  database: database,
+  url: databaseUrl,
   logging: true,
   entities: [Equipment, SatEnv],
-  migrations: [InitializeSchema],
+  migrations: [InitializeSchema1727553773655],
 });

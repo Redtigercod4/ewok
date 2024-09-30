@@ -1,6 +1,7 @@
 import { ObjectLiteral } from "typeorm";
-import { db } from "../database/data-source";
-import { Equipment } from "../database/entity/equipment.entity";
+import { db } from "../database/data-source.js";
+import { Equipment } from "../database/entity/equipment.entity.js";
+import { UnitType } from "../types";
 
 export default class EquipmentService {
   public async get(server: string, team: string): Promise<Equipment[]> {
@@ -10,6 +11,13 @@ export default class EquipmentService {
       .where("equipment.server = :server", { server })
       .andWhere("equipment.team = :team", { team })
       .getMany();
+  }
+
+  public async getAll(): Promise<Equipment[]> {
+    return await db
+    .getRepository(Equipment)
+    .createQueryBuilder("equipment")
+    .getMany();
   }
 
   // Replace Any type with actual type
@@ -45,5 +53,25 @@ export default class EquipmentService {
       .execute();
 
     return hasDeleted.affected;
+  }
+
+  public async resetEquipmentByType(server: string, unitType: UnitType, resetData: any): Promise<boolean> {
+    const equipment = await db.getRepository(Equipment)
+      .createQueryBuilder("equipment")
+      .where("equipment.server = :server", { server })
+      .andWhere("equipment.team != :team", { team: "Instructor" })
+      .andWhere("equipment.unit_type = :unitType", { unitType })
+      .getMany();
+
+    if (!equipment.length) {
+      return false;
+    }
+
+    for (const item of equipment) {
+      const updatedItem = { ...item, ...resetData };
+      await this.update(item.id, updatedItem);
+    }
+
+    return true;
   }
 }

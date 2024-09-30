@@ -1,39 +1,39 @@
 version: "3"
 
 services:
-  ewok-ui:
-    depends_on:
-      - "ewok-api"
-    build:
-      context: ./ui
-      dockerfile: Dockerfile
-    container_name: ewok-web
-    ports:
-      - "80:80"
-    environment:
-      - FAST_REFRESH=false
-    networks:
-      - app-network
+  # ewok-ui:
+  #   depends_on:
+  #     - "ewok-api"
+  #   build:
+  #     context: ./ui
+  #     dockerfile: Dockerfile
+  #   container_name: ewok-web
+  #   ports:
+  #     - "80:80"
+  #   environment:
+  #     - FAST_REFRESH=false
+  #   networks:
+  #     - app-network
 
-  ewok-api:
-    depends_on:
-      ewok-db:
-        condition: service_healthy
-    build:
-      context: ./api
-      dockerfile: Dockerfile
-    container_name: ewok-api
-    ports:
-      - "5000:5000"
-    environment:
-      - NODE_ENV=development
-      - DATABASE_HOST=ewok-db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=ewok
-    networks:
-      - app-network
+  # ewok-api:
+  #   depends_on:
+  #     ewok-db:
+  #       condition: service_healthy
+  #   build:
+  #     context: ./api
+  #     dockerfile: Dockerfile
+  #   container_name: ewok-api
+  #   ports:
+  #     - "5000:5000"
+  #   environment:
+  #     - NODE_ENV=development
+  #     - DATABASE_HOST=ewok-db
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=docker
+  #     - POSTGRES_PORT=5432
+  #     - POSTGRES_DB=ewok
+  #   networks:
+  #     - app-network
 
   ewok-db:
     image: postgres

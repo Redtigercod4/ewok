@@ -1,7 +1,9 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class InitializeSchema implements MigrationInterface {
-  async up(queryRunner: QueryRunner): Promise<void> {
+export class InitializeSchema1727553773655 implements MigrationInterface {
+  name = "InitializeSchema1727553773655";
+
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: "equipment",
@@ -39,31 +41,37 @@ export class InitializeSchema implements MigrationInterface {
           },
           {
             name: "cf",
-            type: "double",
+            type: "double precision",
+            isNullable: true
           },
           {
             name: "bw",
-            type: "double",
+            type: "double precision",
+            isNullable: true
           },
           {
             name: "dr",
-            type: "double",
+            type: "double precision",
+            isNullable: true
           },
           {
             name: "mod",
             type: "int",
+            isNullable: true
           },
           {
             name: "fec",
             type: "int",
+            isNullable: true
           },
           {
             name: "power",
-            type: "double",
+            type: "double precision",
+            isNullable: true
           },
           {
             name: "sat",
-            type: "varchar",
+            type: "varchar"
           },
           {
             name: "feed",
@@ -104,23 +112,28 @@ export class InitializeSchema implements MigrationInterface {
           },
           {
             name: "cf",
-            type: "double",
+            type: "double precision",
+            isNullable: true
           },
           {
             name: "dr",
-            type: "double",
+            type: "double precision",
+            isNullable: true
           },
           {
             name: "mod",
             type: "int",
+            isNullable: true
           },
           {
             name: "fec",
             type: "int",
+            isNullable: true
           },
           {
             name: "power",
-            type: "double",
+            type: "double precision",
+            isNullable: true
           },
           {
             name: "band",
@@ -155,7 +168,7 @@ export class InitializeSchema implements MigrationInterface {
     );
   }
 
-  async down(queryRunner: QueryRunner): Promise<void> {
+  public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable("equipment");
     await queryRunner.dropTable("satenv");
   }

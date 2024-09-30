@@ -5,10 +5,13 @@ import { io } from 'socket.io-client';
 
 const tmpIp = window.location.href.split(':3000', 1)[0];
 
+// Old URL = `${tmpIp}:8080`
+const url = "https://psychic-doodle-59vvrx67667fp7jw-3000.app.github.dev";
+
 const defaultEwokContext = {
     team: "",
     server: "",
-    baseURL: `${tmpIp}:8080`
+    baseURL: url
 };
 
 const EwokContext = createContext({} as IEwokContext);

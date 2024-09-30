@@ -20,22 +20,22 @@ export class Equipment {
   @Column({ length: 50 })
   declare unit_name: string;
 
-  @Column("double")
+  @Column({type: "double precision", nullable: true})
   declare cf: number;
 
-  @Column("double")
+  @Column({type: "double precision", nullable: true})
   declare bw: number;
 
-  @Column("double")
+  @Column({ type: "double precision", nullable: true })
   declare dr: number;
 
-  @Column("int")
+  @Column({type: "int", nullable: true})
   declare mod: number;
 
-  @Column("int")
+  @Column({type: "int", nullable: true})
   declare fec: number;
 
-  @Column("double")
+  @Column({type: "double precision", nullable: true})
   declare power: number;
 
   @Column()

@@ -14,19 +14,19 @@ export class SatEnv {
   @Column({length: 20 })
   declare team: string;
 
-  @Column("double")
+  @Column({type: "double precision", nullable: true})
   declare cf: number;
 
-  @Column("double")
+  @Column({type: "double precision", nullable: true})
   declare dr: number;
 
-  @Column("int")
+  @Column({type: "int", nullable: true})
   declare mod: number;
 
-  @Column("int")
+  @Column({type: "int", nullable: true})
   declare fec: number;
 
-  @Column("double")
+  @Column({type: "double precision", nullable: true})
   declare power: number;
 
   @Column({ length: 5 })

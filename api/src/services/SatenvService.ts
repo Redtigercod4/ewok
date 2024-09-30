@@ -1,6 +1,7 @@
 import { ObjectLiteral } from "typeorm";
-import { db } from "../database/data-source";
-import { SatEnv } from "../database/entity/satenv.entity";
+import { db } from "../database/data-source.js";
+import { SatEnv } from "../database/entity/satenv.entity.js";
+import { Role } from "../types";
 
 export default class SatEnvService {
   public async get(server: string): Promise<SatEnv[]> {
@@ -44,5 +45,23 @@ export default class SatEnvService {
       .execute();
 
     return hasDeleted.affected;
+  }
+
+  public async resetSignalsByRole(
+    server: string,
+    role: Role
+  ): Promise<boolean> {
+    const signals = await db
+      .getRepository(SatEnv)
+      .createQueryBuilder("satenv")
+      .where("satenv.server = :server", { server })
+      .andWhere("satenv.team != :team", { team: role })
+      .getMany();
+
+    for (const signal of signals) {
+      await this.delete(signal.conn);
+    }
+
+    return signals.length > 0;
   }
 }
