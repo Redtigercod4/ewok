@@ -17,6 +17,10 @@ import {
 } from "./context/EwokContext";
 import { useEffect } from "react";
 import "./App.css";
+import Login from "./pages/Login";
+import PrivateRoute from "./components/features/auth/PrivateRoute";
+import { ThemeProvider } from "@emotion/react";
+import { theme } from "./useTheme";
 
 function App() {
   const { socket } = useEwokContext();
@@ -41,21 +45,24 @@ function App() {
   }, [socket]);
 
   return (
-    <Router>
-      <div className="App">
-        <Header />
+    <ThemeProvider theme={theme}>
+      <Router>
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<Landing />} />
+          </Route>
+          {/* <Route path="/" element={<Landing />} />
           <Route path="/studentLogin" element={<StudentLogin />} />
           <Route path="/student" element={<StudentPage />} />
           <Route path="/instructorLogin" element={<InstructorLogin />} />
           <Route path="/instructorCreate" element={<InstructorCreate />} />
           <Route path="/instructorJoin" element={<InstructorJoin />} />
           <Route path="/instructor" element={<InstructorPage />} />
-          <Route path="/help" element={<Help />} />
+          <Route path="/help" element={<Help />} /> */}
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 }
 
