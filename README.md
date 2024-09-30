@@ -1,4 +1,6 @@
 # Ewok
+[![CodeQL](https://github.com/Redtigercod4/ewok/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Redtigercod4/ewok/actions/workflows/codeql.yml)
+
 License: ```Unknown```
 
 Project: ```Active Fork```
