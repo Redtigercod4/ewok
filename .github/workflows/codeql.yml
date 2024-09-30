@@ -1,0 +1,54 @@
+name: "CodeQL - Static Application Security Testing"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  analyze:
+    name: Analyze Code with CodeQL
+    runs-on: 'ubuntu-latest'
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript', 'typescript' ]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+  
+    - name: Perform CodeQL Analysis for Security & Quality
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "security-and-quality"
+
+    - name: Perform CodeQL Analysis for Correctness
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "correctness"
+
+    - name: Perform CodeQL Analysis for Performance
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "performance"
+
+    - name: Perform CodeQL Analysis for Reliability
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "reliability"
+        
