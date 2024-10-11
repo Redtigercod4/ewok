@@ -1,4 +1,4 @@
-name: "CodeQL - Static Application Security Testing"
+name: "CodeQL"
 
 on:
   push:
