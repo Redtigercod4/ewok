@@ -4,6 +4,7 @@ import { __dirname } from "../utils/index.js";
 import { Equipment } from "./entity/equipment.entity.js";
 import { SatEnv } from "./entity/satenv.entity.js";
 import { InitializeSchema1727553773655 } from "./migration/1727553773655-InitializeSchema.js";
+import { User } from "./entity/user.entity.js";
 
 dotenv.configDotenv();
 
@@ -22,6 +23,6 @@ export const db = new DataSource({
   type: "postgres",
   url: databaseUrl,
   logging: true,
-  entities: [Equipment, SatEnv],
+  entities: [Equipment, SatEnv, User],
   migrations: [InitializeSchema1727553773655],
 });

@@ -6,6 +6,42 @@ export class InitializeSchema1727553773655 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
+        name: "users",
+        columns: [
+          {
+            name: "id",
+            type: "int",
+            isPrimary: true,
+            isGenerated: true
+          },
+          {
+            name: "uniqueUserId",
+            type: "uuid",
+          },
+          {
+            name: "username",
+            type: "varchar",
+            length: "10"
+          },
+          {
+            name: "password",
+            type: "varchar",
+            length: "256"
+          },
+          {
+            name: "email",
+            type: "varchar",
+            length: "128"
+          },
+          {
+            name: "isActive",
+            type: "boolean"
+          }
+        ]
+      })
+    )
+    await queryRunner.createTable(
+      new Table({
         name: "equipment",
         columns: [
           {
