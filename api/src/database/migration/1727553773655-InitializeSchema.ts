@@ -87,7 +87,7 @@ export class InitializeSchema1727553773655 implements MigrationInterface {
 
     await queryRunner.createTable(
       new Table({
-        name: "satenv",
+        name: "sat_env",
         columns: [
           {
             name: "id",
@@ -158,6 +158,7 @@ export class InitializeSchema1727553773655 implements MigrationInterface {
           {
             name: "lb",
             type: "boolean",
+            isNullable: true
           },
           {
             name: "active",
@@ -170,6 +171,6 @@ export class InitializeSchema1727553773655 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable("equipment");
-    await queryRunner.dropTable("satenv");
+    await queryRunner.dropTable("sat_env");
   }
 }

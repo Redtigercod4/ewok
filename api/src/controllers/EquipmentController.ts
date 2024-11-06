@@ -13,7 +13,7 @@ export default class EquipmentController extends ErrorController {
       const { server, team } = req.query;
 
       if (!server || !team) {
-        throw ErrorController.InternalServerError();
+        throw ErrorController.InternalServerError("Unable to find server or team");
       }
 
       const retrievedEquipment = await equipmentService.get(

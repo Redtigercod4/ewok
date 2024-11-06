@@ -41,7 +41,7 @@ export class SatEnv {
   @Column({ length: 4 })
   declare stage: string;
 
-  @Column()
+  @Column({ nullable: true })
   declare lb: boolean;
 
   @Column()

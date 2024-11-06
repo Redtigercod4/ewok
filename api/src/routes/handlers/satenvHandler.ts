@@ -13,11 +13,12 @@ export default function satenvHandler(io: Server, socket: Socket) {
 
                 const hasBeenCreated = await satenvService.create(update);
 
+                console.log(JSON.stringify(hasBeenCreated) + " " + "Im satenv handler");
                 // Need to add error handling
 
                 const data = await satenvService.get(update.server);
 
-                io.to(room).emit("satenv_post", data);
+                io.to(room).emit("satEnv_patch", data);
             } catch (error) {
                 console.log(error)
             }
@@ -39,7 +40,7 @@ export default function satenvHandler(io: Server, socket: Socket) {
 
                 const data = await satenvService.get(update.server);
 
-                io.to(room).emit("satenv_patch", data)
+                io.to(room).emit("satEnv_patch", data)
             } catch (error) {
                 console.log(error)
             }
@@ -60,7 +61,7 @@ export default function satenvHandler(io: Server, socket: Socket) {
 
                 const data = await satenvService.get(update.server);
 
-                io.to(room).emit("satenv_delete", data)
+                io.to(room).emit("satEnv_patch", data)
             } catch (error) {
                 console.log(error)
             }

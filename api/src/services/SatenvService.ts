@@ -1,22 +1,20 @@
-import { ObjectLiteral } from "typeorm";
+import { In, ObjectLiteral } from "typeorm";
 import { db } from "../database/data-source.js";
 import { SatEnv } from "../database/entity/satenv.entity.js";
 import { Role } from "../types";
 
 export default class SatEnvService {
-  public async get(server: string): Promise<SatEnv[]> {
+  public async get(requestedServer: string): Promise<SatEnv[]> {
     return await db
-      .getRepository(SatEnv)
-      .createQueryBuilder("satenv")
-      .where("satenv.server = :server", { server })
-      .getMany();
+      .getRepository<SatEnv>(SatEnv)
+      .find({ where: { server: requestedServer } });
   }
 
   // Replace Any type with actual type
   public async create(data: any): Promise<ObjectLiteral[]> {
     const hasBeenCreated = await db
       .getRepository(SatEnv)
-      .createQueryBuilder("satenv")
+      .createQueryBuilder("sat_env")
       .insert()
       .values(data)
       .execute();
@@ -28,9 +26,9 @@ export default class SatEnvService {
   public async update(conn: string, data: any): Promise<number | undefined> {
     const hasUpdated = await db
       .getRepository(SatEnv)
-      .createQueryBuilder("satenv")
+      .createQueryBuilder("sat_env")
       .update(data)
-      .where("satenv.conn = :conn", { conn })
+      .where("sat_env.conn = :conn", { conn })
       .execute();
 
     return hasUpdated.affected;
@@ -39,9 +37,9 @@ export default class SatEnvService {
   public async delete(conn: string): Promise<number | null | undefined> {
     const hasDeleted = await db
       .getRepository(SatEnv)
-      .createQueryBuilder("satenv")
+      .createQueryBuilder("sat_env")
       .delete()
-      .where("satenv.conn = :conn", { conn })
+      .where("sat_env.conn = :conn", { conn })
       .execute();
 
     return hasDeleted.affected;
@@ -53,9 +51,9 @@ export default class SatEnvService {
   ): Promise<boolean> {
     const signals = await db
       .getRepository(SatEnv)
-      .createQueryBuilder("satenv")
-      .where("satenv.server = :server", { server })
-      .andWhere("satenv.team != :team", { team: role })
+      .createQueryBuilder("sat_env")
+      .where("sat_env.server = :server", { server })
+      .andWhere("sat_env.team != :team", { team: role })
       .getMany();
 
     for (const signal of signals) {

@@ -18,6 +18,7 @@ export default class SatenvController extends ErrorController {
 
       const retrivedSatEnv = await satenvService.get(server.toString());
 
+
       res.send(retrivedSatEnv).status(200).end();
     } catch (error) {
       next(error);

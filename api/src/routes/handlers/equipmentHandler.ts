@@ -17,7 +17,7 @@ export default function equipmentHandler(io: Server, socket: Socket) {
 
                 const data = await equipmentService.get(update.server, update.team);
 
-                io.to(room).emit("equipment_post", data);
+                io.to(room).emit("equipment_patch", data);
             } catch (error) {
                 console.log(error)
             }
@@ -62,7 +62,7 @@ export default function equipmentHandler(io: Server, socket: Socket) {
 
                 const data = await equipmentService.get(update.server, update.team)
 
-                io.to(room).emit("equipment_delete", data);
+                io.to(room).emit("equipment_patch", data);
             } catch (error) {
                 console.log(error)
             }

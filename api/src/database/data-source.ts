@@ -21,7 +21,7 @@ const databaseUrl = `postgres://${username}:${password}@${host}:5432/${database}
 export const db = new DataSource({
   type: "postgres",
   url: databaseUrl,
-  logging: true,
+  logging: false,
   entities: [Equipment, SatEnv],
   migrations: [InitializeSchema1727553773655],
 });

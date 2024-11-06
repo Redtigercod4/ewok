@@ -108,7 +108,7 @@ const Receiver = () => {
                     <ReactPlayer
                         config={{ file: { attributes: { controlsList: 'nodownload' } } }}
                         onContextMenu={(e: any) => e.preventDefault()}
-                        url={`${process.env.PUBLIC_URL}/videos/${vidFeed}`}
+                        url={`${import.meta.env.PUBLIC_URL}/videos/${vidFeed}`}
                         width='200px'
                         height='200px'
                         controls={false}
